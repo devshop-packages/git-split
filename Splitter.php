@@ -19,12 +19,13 @@ class Splitter {
    * Install splitsh-lite script.
    */
   static function install($bin_dir = 'bin') {
+
       $name = self::SPLITSH_NAME;
-      $os = PHP_OS_FAMILY;
-      if (!isset(self::SPLITSH_URL[PHP_OS_FAMILY])) {
-          throw new \LogicException("There's no splitsh-lite version for '" . PHP_OS_FAMILY . "' operating system.");
+      $os = php_uname('s');
+      if (!isset(self::SPLITSH_URL[$os])) {
+          throw new \LogicException("There's no splitsh-lite version for '{$os}' operating system.");
       }
-      $url = self::SPLITSH_URL[PHP_OS_FAMILY];
+      $url = self::SPLITSH_URL[$os];
 
       // @TODO: Load BIN path from composer project bin path.
       $bin_path = "{$bin_dir}/{$name}";
